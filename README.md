@@ -1,8 +1,8 @@
 # Pipeline de Detecção de variante somática (intro)
 
-Clona o repositório com arquivos de exemplo
+Clonar o repositório com arquivos de exemplo
 
-Baixa um repositório do GitHub contendo:
+Baixar um repositório do GitHub contendo:
 - BAM tumor
 - BAM normal
 - VCF gnomAD filtrado
@@ -11,10 +11,11 @@ Baixa um repositório do GitHub contendo:
 ```bash 
 !git clone https://github.com/renatopuga/somatico.git
 ```
-Baixa o cromossomo 9 de hg19
+Baixar o cromossomo 9 de hg19
 ```bash 
 !wget -c https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/chr9.fa.gz
 ```
+Remover o "chr" do nome das sequências
 ```bash
 !zcat chr9.fa.gz | sed -e "s/chr//g" > chr9.fa
 ```
