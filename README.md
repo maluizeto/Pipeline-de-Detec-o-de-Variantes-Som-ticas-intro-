@@ -1,6 +1,6 @@
 # Pipeline de Detecção de variante somática (intro)
 
-Clona o repositório com arquivos de exemplo.
+Clona o repositório com arquivos de exemplo
 
 Baixa um repositório do GitHub contendo:
 - BAM tumor
@@ -11,6 +11,7 @@ Baixa um repositório do GitHub contendo:
 ```bash 
 !git clone https://github.com/renatopuga/somatico.git
 ```
+Baixa o cromossomo 9 de hg19
 ```bash 
 !wget -c https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/chr9.fa.gz
 ```
