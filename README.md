@@ -94,14 +94,12 @@
 	-O contamination.table
 ```
 ```bash
+./gatk-4.2.2.0/gatk FilterMutectCalls \
+	-R chr9.fa \
+	-V somatic.vcf.gz \
+	--contamination-table contamination.table \
+	-O filtered.vcf.gz
+```
 ```bash
-```bash
-```bash
-```bash
-```bash
-```bash
-```bash
-```bash
-```bash
-
-
+!zgrep -v "##" filtered.vcf.gz
+```
