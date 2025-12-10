@@ -1,1 +1,1 @@
-# Pipeline-de-Detec-o-de-Variantes-Som-ticas-intro-
+# Pipeline de Detecção de variante somática (intro)
