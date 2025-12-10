@@ -57,31 +57,36 @@ Baixar o GATK:
 ```bash
 !wget -c https://github.com/broadinstitute/gatk/releases/download/4.2.2.0/gatk-4.2.2.0.zip
 ```
+Descompactar o GATK:
 ```bash
 !unzip gatk-4.2.2.0.zip
 ```
+Testar o executável: 
 ```bash
 !./gatk-4.2.2.0/gatk
 ```
+Instalar o Java (necessário para GATK):
 ```bash
 !apt-get update
 !apt-get install openjdk-11-jdk -y
 ```
+Cria o dicionário do FASTA:
 ```bash
 !./gatk-4.2.2.0/gatk CreateSequenceDictionary -R chr9.fa -O chr9.dict
 ```
+GeraR um arquivo com todas as regiões válidas do cromossomo 9. Serve para restringir análises ao cromossomo 9 (evita rodar Mutect2 no genoma inteiro):
 ```bash
 !./gatk-4.2.2.0/gatk ScatterIntervalsByNs -R chr9.fa -O chr9.interval_list -OT ACGT
 ```
-```bash
-!ls
-```
+Visualizar o dicionário:
 ```bash
 !cat chr9.dict
 ```
+Descobrir o nome da amostra dentro do BAM normal:
 ```bash
 !samtools view -H somatico/normal_JAK2.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 ```
+Roda o Mutect2 (detecção de variantes somáticas):
 ```bash
 ./gatk-4.2.2.0/gatk Mutect2 \
  -R chr9.fa \
@@ -92,12 +97,15 @@ Baixar o GATK:
 	-O somatic.vcf.gz \
 	-L chr9.interval_list
 ```
+Mostra apenas as variantes (sem header):
 ```bash
 !zgrep -v "\##" somatic.vcf.gz
 ```
+Mostra apenas o header do VCF:
 ```bash
 !zgrep "##" somatic.vcf.gz
 ```
+Calcula contaminação no tumor:
 ```bash
 !./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I somatico/tumor_JAK2.bam \
@@ -105,9 +113,11 @@ Baixar o GATK:
 	-L chr9.interval_list \
 	-O tumor_JAK2.table
 ```
+Visualizar:
 ```bash
 !head tumor_JAK2.table
 ```
+Calcular contaminação no normal (mesmo comando):
 ```bash
 !./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I somatico/normal_JAK2.bam \
@@ -115,12 +125,14 @@ Baixar o GATK:
 	-L chr9.interval_list \
 	-O normal_JAK2.table
 ```
+Estima a taxa de contaminação:
 ```bash
 ./gatk-4.2.2.0/gatk CalculateContamination \
 	-I tumor_JAK2.table \
 	-matched normal_JAK2.table \
 	-O contamination.table
 ```
+Estima a taxa de contaminação:
 ```bash
 ./gatk-4.2.2.0/gatk FilterMutectCalls \
 	-R chr9.fa \
@@ -128,6 +140,7 @@ Baixar o GATK:
 	--contamination-table contamination.table \
 	-O filtered.vcf.gz
 ```
+Mostra variantes finais (somáticas filtradas):
 ```bash
 !zgrep -v "##" filtered.vcf.gz
 ```
