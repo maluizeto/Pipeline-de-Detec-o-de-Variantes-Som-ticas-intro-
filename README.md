@@ -1,6 +1,7 @@
 # Pipeline de Detecção de variante somática (intro)
 
 Clona o repositório com arquivos de exemplo.
+
 Baixa um repositório do GitHub contendo:
 - BAM tumor
 - BAM normal
