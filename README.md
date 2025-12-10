@@ -19,24 +19,41 @@ Remover o "chr" do nome das sequências:
 ```bash
 !zcat chr9.fa.gz | sed -e "s/chr//g" > chr9.fa
 ```
+Visualiza o início do arquivo FASTA original:
 ```bash
 !zcat chr9.fa.gz | head
 ```
+Visualizarr o FASTA modificado:
 ```bash
 !head chr9.fa
 ```
+Instalar o Samtools:
 ```bash
 !sudo apt-get install samtools
 ```
+Testar o funcionamento do comando:
 ```bash
 !samtools
 ```
+Criar indice do FASTA.
+
+Gera o arquivo chr9.fa.fai, que contém:
+- nome do contig (contig= sequência do DNA contínua, sem lacunas)
+- tamanho do contig
+- posição no arquivo
+Obrigatório para GATK / Mutect2.
+
 ```bash
 !samtools faidx chr9.fa
 ```
+
+Visualizar o índice:
 ```bash
 ! cat chr9.fa.fai
 ```
+Baixar o GATK:
+
+(GATK é uma ferramenta que detecta mutações no DNA usando dados de sequenciamento. É o padrão ouro para análise de variantes.)
 ```bash
 !wget -c https://github.com/broadinstitute/gatk/releases/download/4.2.2.0/gatk-4.2.2.0.zip
 ```
